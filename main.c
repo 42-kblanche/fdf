@@ -6,33 +6,113 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:53:15 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/01 16:44:15 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/02 19:25:37 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_utils.h"
 #include "src/libft/printfft.h"
 #include "src/libft/libft.h"
-#include "src/mlx/mlx.h"
 #include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <math.h>
 
-static int	bind_hooks(t_vars *mlx)
+static size_t	fdf_count_valid_cells(char **cells)
 {
-	mlx_key_hook(mlx->win, key_hook, mlx);
-	mlx_hook(mlx->win, EVENT_DESTROY, 0, quit_hook, mlx);
-	return (0);
+	size_t	i;
+	size_t	ret;
+	char	**tmp;
+
+	i = 0;
+	ret = 0;
+	while (cells[i])
+	{
+		if (*(cells[i]))
+			++ret;
+		++i;
+	}
+	return (ret);
 }
 
-static int	parse_file(char *filename, t_fdf *fdf_data)
+static void	fdf_sanitize_cells(char ***cells)
+{
+	size_t	i;
+	size_t	j;
+	char	**tmp;
+	char	**cell_data;
+
+	cell_data = *cells;
+	i = 0;
+	tmp = ft_calloc(fdf_count_valid_cells(cell_data) + 1, sizeof(char *));
+	j = 0;
+	while (cell_data[i])
+	{
+		if (*(cell_data[i]))
+		{
+			tmp[j] = cell_data[i];
+			++j;
+		}
+		++i;
+	}
+	free (*cells);
+	*cells = tmp;
+}
+
+static int	fdf_extract_raw(char *filename, t_fdf *fdf_data)
 {
 	size_t	i;
 	size_t	size;
+	int		fd;
+	char	*line;
+	char	**cells;
 
-	(void)filename;
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (ERROR_READ_FROM_FILE);
+	line = ft_gnl(fd);
+	while (line)
+	{
+		++fdf_data->height;
+		cells = ft_split(line, ' ');
+		if (fdf_data->width)
+		fdf_sanitize_cells(&cells);
+		while (cells[i])
+		{
+			if (cells[i])
+			{
+				++fdf_data
+			}
+			
+		}
+		
+		free(line);
+		line = ft_gnl(fd);
+	}
+}
+
+static int	fdf_from_file(char *filename, t_fdf *fdf_data)
+{
+	size_t	i;
+	size_t	size;
+	int		fd;
+	char	*line;
+	char	**cells;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (ERROR_READ_FROM_FILE);
+	line = ft_gnl(fd);
+	while (line)
+	{
+		++fdf_data->width;
+		cells = ft_split(line, ' ');
+		free(line);
+		line = ft_gnl(fd);
+	}
+
+
 	i = 0;
-	fdf_data->width = 10;
-	fdf_data->height = 10;
 	size = fdf_data->width * fdf_data->height;
 	fdf_data->data = ft_calloc(size, sizeof(int));
 	if (!fdf_data->data)
@@ -43,29 +123,6 @@ static int	parse_file(char *filename, t_fdf *fdf_data)
 		++i;
 	}
 	fdf_print_data(fdf_data);
-	return (0);
-}
-
-static int	fdf(t_fdf *fdf_data)
-{
-	t_vars	mlx;
-	t_data	img;
-
-	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, WIN_SIZE_X, WIN_SIZE_Y, "fdf");
-	bind_hooks(&mlx);
-	img.img = mlx_new_image(mlx.mlx, WIN_SIZE_X, WIN_SIZE_Y);
-	img.addr = mlx_get_data_addr(img.img,
-			&img.bpp, &img.line_length, &img.endian);
-	fdf_checker(&img);
-	fdf_quad_put(&img, ft_quadi(ft_vec2i(1, 1),
-			ft_vec2i(WIN_SIZE_X - 150, 75),
-			ft_vec2i(WIN_SIZE_X - 75, WIN_SIZE_Y - 75),
-			ft_vec2i(75, WIN_SIZE_Y - 75)), HEX_COLOR_PUR);
-	fdf_draw(&img, fdf_data, HEX_COLOR_RED);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
-	mlx_loop(mlx.mlx);
-	free(fdf_data->data);
 	return (0);
 }
 
@@ -84,9 +141,9 @@ int	main(int argc, char **argv)
 		return (1);
 	filename = argv[1];
 	ft_printf("USING FILE %s\n", filename);
-	err_ret = parse_file(filename, &fdf_data);
+	err_ret = fdf_from_file(filename, &fdf_data);
 	if (!err_ret)
-		err_ret = fdf(&fdf_data);
+		err_ret = fdf_exec(&fdf_data);
 	fdf_err_message(err_ret);
 	return (err_ret);
 }

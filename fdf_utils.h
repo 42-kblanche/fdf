@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 21:09:58 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/01 16:29:57 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/02 17:52:01 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # define ERROR_MALLOC_FDF_DATA 2
 # define ERROR_READ_FROM_FILE 3
 # define ERROR_MLX 4
+# define ERROR_MLX_INIT 5
+# define ERROR_MLX_WIN 6
+# define ERROR_MLX_IMG 7
 # define EVENT_DESTROY 17
 # define ESCAPE_KEY_CODE 65307
 # define CLOSE_KEY_CODE 1890534152
@@ -71,5 +74,7 @@ void	fdf_draw(t_data *img, const t_fdf *fdf, t_color c);
 
 int		key_hook(int keycode, t_vars *mlx);
 int		quit_hook(t_vars *mlx);
+
+int		fdf_exec(t_fdf *fdf_data);
 
 #endif

@@ -31,6 +31,7 @@ INCFT = $(INCLUDES)/$(LIBFT)
 SRCFT = $(LIBFTDIR)/$(LIBFT)
 
 SRCS = $(MAIN) \
+       fdf_exec.c \
        fdf_utils.c \
        fdf_utils_shapes.c \
 	   fdf_utils_iso.c \

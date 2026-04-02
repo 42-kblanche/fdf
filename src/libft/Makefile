@@ -9,6 +9,7 @@ BLUE = \033[0;34m
 SRCS = ft_calloc.c \
 	   ft_atoi.c \
 	   ft_atol.c \
+	   ft_gnl.c \
 	   ft_isspace.c \
 	   ft_isdigit.c \
 	   ft_itoa.c \
@@ -16,13 +17,16 @@ SRCS = ft_calloc.c \
 	   ft_memcpy.c \
 	   ft_ptoh.c \
 	   ft_putstr_fd.c \
+	   ft_split.c \
 	   ft_strdup.c \
 	   ft_strfind.c \
 	   ft_strlcpy.c \
 	   ft_strlen.c \
 	   ft_strncmp.c \
 	   ft_tolower.c \
-	   ft_toupper.c \
+	   ft_toupper.c
+ifneq ($(wildcard bufft/),)
+	SRCS += \
 	   buffft/ft_buff_append.c \
 	   buffft/ft_buff_assign.c \
 	   buffft/ft_buff_destroy.c \
@@ -32,19 +36,26 @@ SRCS = ft_calloc.c \
 	   buffft/ft_buff_insert.c \
 	   buffft/ft_buff_insert_2.c \
 	   buffft/ft_buff_print.c \
-	   buffft/ft_buff_substr.c \
+	   buffft/ft_buff_substr.c
+endif
+ifneq ($(wildcard printfft/),)
 	   printfft/ft_printf_parse.c \
 	   printfft/ft_printf_parse_2.c \
 	   printfft/ft_errorf.c \
 	   printfft/ft_putf.c \
 	   printfft/ft_printf.c \
-	   printfft/ft_printf_va.c \
-	   graphicft/ft_color.c \
+	   printfft/ft_printf_va.c
+endif
+ifneq ($(wildcard graphicft/),)
+	   graphicft/ft_color.c
+endif
+ifneq ($(wildcard mathft/),)
 	   mathft/ft_lerp.c \
 	   mathft/ft_max.c \
 	   mathft/ft_min.c \
 	   mathft/ft_quad.c \
 	   mathft/ft_vec2.c
+endif
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

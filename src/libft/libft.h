@@ -6,12 +6,13 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:57:13 by kblanche          #+#    #+#             */
-/*   Updated: 2026/03/29 19:34:44 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/02 18:44:36 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define GNL_BUFFER_SIZE 512
 
 # include <sys/types.h>
 # include <stddef.h>
@@ -19,6 +20,7 @@
 void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_atoi(const char *str);
 long int	ft_atol(const char *str);
+char		*ft_gnl(int fd);
 int			ft_isspace(char c);
 int			ft_isdigit(char c);
 char		*ft_itoa(int n);
@@ -27,6 +29,7 @@ char		*ft_itoh(unsigned int n);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 char		*ft_ptoh(const void *ptr);
 void		ft_putstr_fd(char *s, int fd);
+char		**ft_split(const char *s, char c);
 char		*ft_strdup(const char *s);
 char		*ft_memdup(const char *buff, size_t size);
 ssize_t		ft_strfind(const char *haystack, const char *needle);
@@ -34,6 +37,7 @@ ssize_t		ft_bufffind(const char *haystack, const char *needle,
 				size_t max_len);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 size_t		ft_strlen(const char *str);
+size_t		ft_strlen_c(const char *str, char c);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		ft_strtolower(char *str);
 void		ft_strtoupper(char *str);
