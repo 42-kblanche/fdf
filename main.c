@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:53:15 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/07 19:09:10 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 19:25:01 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ static int	fdf_from_file(char *filename, t_fdf *fdf)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (ERROR_READ_FROM_FILE);
+	// FIXME: leak with 42-err.fdf
 	line = ft_gnl(fd);
 	fdf->width = fdf_count_valid_cells(line);
 	fdf->data = ft_calloc(fdf->width * fdf->height, sizeof(int));
