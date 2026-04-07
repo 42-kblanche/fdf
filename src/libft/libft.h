@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:57:13 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/02 18:44:36 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:31:49 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_atoi(const char *str);
 long int	ft_atol(const char *str);
+size_t		ft_count_words(const char *s, char c);
 char		*ft_gnl(int fd);
+size_t		ft_count_lines(int fd);
 int			ft_isspace(char c);
 int			ft_isdigit(char c);
 char		*ft_itoa(int n);
@@ -39,6 +41,7 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 size_t		ft_strlen(const char *str);
 size_t		ft_strlen_c(const char *str, char c);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
+char		*ft_substr(const char *s, unsigned int start, size_t len);
 void		ft_strtolower(char *str);
 void		ft_strtoupper(char *str);
 int			ft_tolower(int c);

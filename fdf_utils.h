@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 21:09:58 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/02 17:52:01 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 19:19:14 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,10 @@
 # define WIN_SIZE_Y 480
 # define HEX_COLOR_RED 0x00FF0000
 # define HEX_COLOR_PUR 0x00876497
-# define LINE_WIDTH 3
+# define LINE_WIDTH 1
 # define X_RATIO 30
 # define Y_RATIO 15
-# define Z_RATIO 10
-# define ERROR_MALLOC_FDF_DATA 2
-# define ERROR_READ_FROM_FILE 3
-# define ERROR_MLX 4
-# define ERROR_MLX_INIT 5
-# define ERROR_MLX_WIN 6
-# define ERROR_MLX_IMG 7
+# define Z_RATIO 1
 # define EVENT_DESTROY 17
 # define ESCAPE_KEY_CODE 65307
 # define CLOSE_KEY_CODE 1890534152
@@ -34,6 +28,19 @@
 # include "src/libft/graphicft.h"
 # include "src/libft/mathft.h"
 # include <stddef.h>
+
+enum	e_err_codes
+{
+	ERROR_MALLOC_FDF_DATA = 2,
+	ERROR_READ_FROM_FILE,
+	ERROR_MLX,
+	ERROR_MLX_INIT,
+	ERROR_MLX_WIN,
+	ERROR_MLX_IMG,
+	ERROR_FILE_EMPTY,
+	ERROR_MALFORMED_FDF,
+	ERROR_MALLOC_EXTRACT_CELLS,
+};
 
 typedef struct s_vars
 {

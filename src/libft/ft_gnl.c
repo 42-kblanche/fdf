@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 18:47:47 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/02 18:15:54 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:29:26 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static char	*extract_line(char *leftover)
 	i = ft_strlen_c(leftover, '\n');
 	if (leftover[i] == '\n')
 		++i;
-	ret = ft_substr(leftover, i);
+	ret = ft_substr(leftover, 0, i);
 	leftover_len = ft_strlen(leftover + i);
 	ft_memcpy(leftover, leftover + i, leftover_len);
 	leftover[leftover_len] = '\0';

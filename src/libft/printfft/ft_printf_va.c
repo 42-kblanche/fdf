@@ -6,11 +6,12 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:58:49 by kblanche          #+#    #+#             */
-/*   Updated: 2026/03/28 21:49:19 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:34:06 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../printfft.h"
+#include "../buffft.h"
 #include "../libft.h"
 #include <stdarg.h>
 #include <stddef.h>

@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:43:43 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/01 16:30:07 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:50:47 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	fdf_print_data(const t_fdf *fdf)
 
 void	fdf_draw(t_data *img, const t_fdf *fdf, t_color c)
 {
-	
 	size_t	i;
 	size_t	j;
 
@@ -60,9 +59,11 @@ void	fdf_draw(t_data *img, const t_fdf *fdf, t_color c)
 		while (j < fdf->height)
 		{
 			if (i < fdf->width - 1)
-				fdf_line_put(img, fdf_iso_proj(fdf_calc_vec3(fdf, i, j)), fdf_iso_proj(fdf_calc_vec3(fdf, i + 1, j)), c);
+				fdf_line_put(img, fdf_iso_proj(fdf_calc_vec3(fdf, i, j)),
+					fdf_iso_proj(fdf_calc_vec3(fdf, i + 1, j)), c);
 			if (j < fdf->height - 1)
-				fdf_line_put(img, fdf_iso_proj(fdf_calc_vec3(fdf, i, j)), fdf_iso_proj(fdf_calc_vec3(fdf, i, j + 1)), c);
+				fdf_line_put(img, fdf_iso_proj(fdf_calc_vec3(fdf, i, j)),
+					fdf_iso_proj(fdf_calc_vec3(fdf, i, j + 1)), c);
 			++j;
 		}
 		++i;

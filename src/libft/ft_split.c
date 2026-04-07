@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 22:51:06 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/02 18:52:22 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:32:47 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	substr_check(const char *s, char c, char **r, size_t k)
 	r[k] = ft_substr(s, 0, word_len(s, c));
 	if (!r[k])
 	{
-		free_tab(r, count_words(s, c));
+		free_tab(r, ft_count_words(s, c));
 		return (0);
 	}
 	return (1);
@@ -56,7 +56,7 @@ char	**ft_split(const char *s, char c)
 
 	i = 0;
 	k = 0;
-	r = (char **)ft_calloc(count_words(s, c) + 1, sizeof(char *));
+	r = (char **)ft_calloc(ft_count_words(s, c) + 1, sizeof(char *));
 	if (!r)
 		return (0);
 	bflag = 1;

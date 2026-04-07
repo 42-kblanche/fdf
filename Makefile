@@ -4,10 +4,8 @@ MAIN = main.c
 DMODE =
 CFLAGS = -Wall -Wextra -Werror
 
-ifeq ($1, debug)
-	CFLAGS += -g
-	DMODE += (debug mode)
-endif
+CFLAGS += -g
+DMODE += (debug mode)
 
 NEUTRAL = \033[0;0m
 RED = \033[0;31m
@@ -15,8 +13,6 @@ YELLOW = \033[0;33m
 BLUE = \033[0;34m
 
 INCLUDES = includes
-
-MATH = m
 
 MLX = mlx
 LIBMLX = libmlx.a
@@ -46,7 +42,7 @@ debug: $(NAME)
 re: fclean all
 
 $(NAME): $(OBJS) $(INCFT) $(INCMLX)
-	@$(CC) $(CFLAGS) $(OBJS) -L$(INCLUDES) -l$(FT) -l$(MLX) -lXext -lX11 -l$(MATH) -o $@
+	@$(CC) $(CFLAGS) $(OBJS) -L$(INCLUDES) -l$(FT) -l$(MLX) -lXext -lX11 -lm -o $@
 	@printf "${YELLOW}Building ${BLUE}$@ ${YELLOW}${DMODE}\n${NEUTRAL}"
 
 %.o: %.c

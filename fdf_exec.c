@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 17:49:12 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/02 17:57:54 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 19:02:54 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	bind_hooks(t_vars *mlx)
 static void	close_fdf(t_vars *mlx, t_data *img, t_fdf *fdf_data)
 {
 	free(fdf_data->data);
+	fdf_data->data = NULL;
 	mlx_destroy_image(mlx->mlx, img->img);
 	mlx_destroy_display(mlx->mlx);
 	free(mlx->mlx);
@@ -31,11 +32,11 @@ static void	close_fdf(t_vars *mlx, t_data *img, t_fdf *fdf_data)
 
 static void	fdf_render(t_vars *mlx, t_data *img, t_fdf *fdf_data)
 {
-	fdf_checker(img);
-	fdf_quad_put(img, ft_quadi(ft_vec2i(1, 1),
-			ft_vec2i(WIN_SIZE_X - 150, 75),
-			ft_vec2i(WIN_SIZE_X - 75, WIN_SIZE_Y - 75),
-			ft_vec2i(75, WIN_SIZE_Y - 75)), HEX_COLOR_PUR);
+	// fdf_checker(img);
+	// fdf_quad_put(img, ft_quadi(ft_vec2i(1, 1),
+	// 		ft_vec2i(WIN_SIZE_X - 150, 75),
+	// 		ft_vec2i(WIN_SIZE_X - 75, WIN_SIZE_Y - 75),
+	// 		ft_vec2i(75, WIN_SIZE_Y - 75)), HEX_COLOR_PUR);
 	fdf_draw(img, fdf_data, HEX_COLOR_RED);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, img->img, 0, 0);
 }
@@ -58,7 +59,7 @@ static int	fdf_init(t_vars *mlx, t_data *img)
 		return (ERROR_MLX_IMG);
 	}
 	img->addr = mlx_get_data_addr(img->img,
-		&img->bpp, &img->line_length, &img->endian);
+			&img->bpp, &img->line_length, &img->endian);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 09:12:43 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/02 14:47:07 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 18:32:07 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,21 @@ int	fdf_pixel_put(t_data *img, int x, int y, t_color color)
 void	fdf_err_message(int err_code)
 {
 	if (err_code == ERROR_MALLOC_FDF_DATA)
-		ft_errorf("Error while allocating memory for FDF data\n");
+		ft_errorf("Error while allocating memory for FDF data.\n");
 	if (err_code == ERROR_READ_FROM_FILE)
-		ft_errorf("Error while reading from file\n");
+		ft_errorf("Error while reading from file.\n");
 	if (err_code == ERROR_MLX)
-		ft_errorf("Error while using the MLX\n");
+		ft_errorf("Error while using the MLX.\n");
 	if (err_code == ERROR_MLX_INIT)
-		ft_errorf("Error while initializing the MLX instance\n");
+		ft_errorf("Error while initializing the MLX instance.\n");
 	if (err_code == ERROR_MLX_WIN)
-		ft_errorf("Error while initializing the MLX window\n");
+		ft_errorf("Error while initializing the MLX window.\n");
 	if (err_code == ERROR_MLX_IMG)
-		ft_errorf("Error while initializing an MLX image\n");
+		ft_errorf("Error while initializing an MLX image.\n");
+	if (err_code == ERROR_FILE_EMPTY)
+		ft_errorf("Error: file empty.\n");
+	if (err_code == ERROR_MALFORMED_FDF)
+		ft_errorf("Error: fdf data invalid.\n");
+	if (err_code == ERROR_MALLOC_EXTRACT_CELLS)
+		ft_errorf("Error while creating fdf structure.\n");
 }

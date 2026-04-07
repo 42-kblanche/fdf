@@ -9,7 +9,9 @@ BLUE = \033[0;34m
 SRCS = ft_calloc.c \
 	   ft_atoi.c \
 	   ft_atol.c \
+	   ft_count_words.c \
 	   ft_gnl.c \
+	   ft_count_lines.c \
 	   ft_isspace.c \
 	   ft_isdigit.c \
 	   ft_itoa.c \
@@ -23,9 +25,10 @@ SRCS = ft_calloc.c \
 	   ft_strlcpy.c \
 	   ft_strlen.c \
 	   ft_strncmp.c \
+	   ft_substr.c \
 	   ft_tolower.c \
 	   ft_toupper.c
-ifneq ($(wildcard bufft/),)
+ifneq ($(wildcard buffft/),)
 	SRCS += \
 	   buffft/ft_buff_append.c \
 	   buffft/ft_buff_assign.c \
@@ -39,6 +42,7 @@ ifneq ($(wildcard bufft/),)
 	   buffft/ft_buff_substr.c
 endif
 ifneq ($(wildcard printfft/),)
+	SRCS += \
 	   printfft/ft_printf_parse.c \
 	   printfft/ft_printf_parse_2.c \
 	   printfft/ft_errorf.c \
@@ -47,9 +51,11 @@ ifneq ($(wildcard printfft/),)
 	   printfft/ft_printf_va.c
 endif
 ifneq ($(wildcard graphicft/),)
+	SRCS += \
 	   graphicft/ft_color.c
 endif
 ifneq ($(wildcard mathft/),)
+	SRCS += \
 	   mathft/ft_lerp.c \
 	   mathft/ft_max.c \
 	   mathft/ft_min.c \
