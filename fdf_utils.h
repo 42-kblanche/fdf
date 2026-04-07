@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 21:09:58 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/07 19:19:14 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 22:49:59 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 
 # define WIN_SIZE_X 640
 # define WIN_SIZE_Y 480
+# define PAD_SIZE_X 10
+# define PAD_SIZE_Y 10
+# define PADDED_WIN_X 620
+# define PADDED_WIN_Y 460
 # define HEX_COLOR_RED 0x00FF0000
 # define HEX_COLOR_PUR 0x00876497
 # define LINE_WIDTH 1
 # define X_RATIO 30
 # define Y_RATIO 15
-# define Z_RATIO 1
+# define Z_RATIO 60
 # define EVENT_DESTROY 17
 # define ESCAPE_KEY_CODE 65307
 # define CLOSE_KEY_CODE 1890534152
@@ -73,6 +77,12 @@ void	fdf_line_put(t_data *img, t_vec2i a, t_vec2i b, t_color c);
 void	fdf_quad_put(t_data *img, t_quadi q, t_color col);
 
 t_vec2i	fdf_iso_proj(t_vec3i vec);
+t_vec2i	*fdf_iso_coord(const t_fdf *fdf);
+void	fdf_iso_scale(const t_fdf *fdf, t_vec2i **iso_coord);
+void	fdf_iso_translate(const t_fdf *fdf, t_vec2i **iso_coord);
+void	fdf_iso_draw(t_data *img, const t_fdf *fdf,
+			t_color c, const t_vec2i *iso_coord);
+t_vec2i	fdf_calc_translate(const t_fdf *fdf, const t_vec2i *iso_coord);
 
 t_vec3i	fdf_calc_vec3(const t_fdf *fdf, int x, int y);
 int		fdf_calc_z(const t_fdf *fdf, int x, int y);

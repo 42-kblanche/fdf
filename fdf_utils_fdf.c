@@ -6,12 +6,13 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:43:43 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/07 17:50:47 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 21:26:40 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_utils.h"
-#include "src/libft/printfft.h"
+#include "src/libft/libft.h"
+#include <stdlib.h>
 
 t_vec3i	fdf_calc_vec3(const t_fdf *fdf, int x, int y)
 {
@@ -28,44 +29,46 @@ int	fdf_calc_z(const t_fdf *fdf, int x, int y)
 	return (fdf->data[y * fdf->width + x]);
 }
 
-void	fdf_print_data(const t_fdf *fdf)
+t_vec2i	fdf_iso_proj(t_vec3i vec)
 {
+	t_vec2i	ret;
+
+	ret.x = (WIN_SIZE_X / 2 + (vec.x - vec.y) * X_RATIO);
+	ret.y = (WIN_SIZE_Y / 20 + (vec.x + vec.y) * Y_RATIO);
+	ret.y -= Z_RATIO * vec.z;
+	return (ret);
+}
+
+t_vec2i	*fdf_iso_coord(const t_fdf *fdf)
+{
+	t_vec2i	*iso_coords;
 	size_t	i;
 	size_t	j;
+	t_vec3i	tmp_3d_point;
 
+	iso_coords = ft_calloc(fdf->height * fdf->width, sizeof(t_vec2i));
 	i = 0;
 	while (i < fdf->width)
 	{
 		j = 0;
 		while (j < fdf->height)
 		{
-			ft_printf("%d ", fdf_calc_z(fdf, i, j));
+			tmp_3d_point = fdf_calc_vec3(fdf, i, j);
+			iso_coords[i + j * fdf->width] = fdf_iso_proj(tmp_3d_point);
 			++j;
 		}
-		ft_printf("\n");
 		++i;
 	}
+	return (iso_coords);
 }
 
 void	fdf_draw(t_data *img, const t_fdf *fdf, t_color c)
 {
-	size_t	i;
-	size_t	j;
+	t_vec2i	*iso_coord;
 
-	i = 0;
-	while (i < fdf->width)
-	{
-		j = 0;
-		while (j < fdf->height)
-		{
-			if (i < fdf->width - 1)
-				fdf_line_put(img, fdf_iso_proj(fdf_calc_vec3(fdf, i, j)),
-					fdf_iso_proj(fdf_calc_vec3(fdf, i + 1, j)), c);
-			if (j < fdf->height - 1)
-				fdf_line_put(img, fdf_iso_proj(fdf_calc_vec3(fdf, i, j)),
-					fdf_iso_proj(fdf_calc_vec3(fdf, i, j + 1)), c);
-			++j;
-		}
-		++i;
-	}
+	iso_coord = fdf_iso_coord(fdf);
+	fdf_iso_scale(fdf, &iso_coord);
+	fdf_iso_translate(fdf, &iso_coord);
+	fdf_iso_draw(img, fdf, c, iso_coord);
+	free(iso_coord);
 }

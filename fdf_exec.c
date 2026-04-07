@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 17:49:12 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/07 19:02:54 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 20:03:37 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@ static void	close_fdf(t_vars *mlx, t_data *img, t_fdf *fdf_data)
 
 static void	fdf_render(t_vars *mlx, t_data *img, t_fdf *fdf_data)
 {
-	// fdf_checker(img);
-	// fdf_quad_put(img, ft_quadi(ft_vec2i(1, 1),
-	// 		ft_vec2i(WIN_SIZE_X - 150, 75),
-	// 		ft_vec2i(WIN_SIZE_X - 75, WIN_SIZE_Y - 75),
-	// 		ft_vec2i(75, WIN_SIZE_Y - 75)), HEX_COLOR_PUR);
 	fdf_draw(img, fdf_data, HEX_COLOR_RED);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, img->img, 0, 0);
 }

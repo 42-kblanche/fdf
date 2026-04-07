@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 09:12:43 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/07 18:32:07 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 21:26:00 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,23 @@ void	fdf_err_message(int err_code)
 		ft_errorf("Error: fdf data invalid.\n");
 	if (err_code == ERROR_MALLOC_EXTRACT_CELLS)
 		ft_errorf("Error while creating fdf structure.\n");
+}
+
+void	fdf_print_data(const t_fdf *fdf)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (i < fdf->width)
+	{
+		j = 0;
+		while (j < fdf->height)
+		{
+			ft_printf("%d ", fdf_calc_z(fdf, i, j));
+			++j;
+		}
+		ft_printf("\n");
+		++i;
+	}
 }

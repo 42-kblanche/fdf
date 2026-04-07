@@ -37,7 +37,7 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-debug: $(NAME)
+debug: clean $(NAME)
 
 re: fclean all
 
