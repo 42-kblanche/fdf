@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 09:12:43 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/01 16:25:26 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 23:13:15 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static void	line_put_loop_v(t_data *img, t_vec2i a, t_vec2i b, t_color c)
 
 void	fdf_line_put(t_data *img, t_vec2i a, t_vec2i b, t_color c)
 {
-	if ((b.x == a.x) || (b.y - a.y) / (b.x - a.x) > 1)
+	if (ft_max_int(a.y, b.y) - ft_min_int(a.y, b.y)
+		> ft_max_int(a.x, b.x) - ft_min_int(a.x, b.x))
 		line_put_loop_v(img, a, b, c);
 	else
 		line_put_loop_h(img, a, b, c);

@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 21:09:58 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/07 22:49:59 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/07 23:14:28 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define LINE_WIDTH 1
 # define X_RATIO 30
 # define Y_RATIO 15
-# define Z_RATIO 60
+# define Z_RATIO 10
 # define EVENT_DESTROY 17
 # define ESCAPE_KEY_CODE 65307
 # define CLOSE_KEY_CODE 1890534152
