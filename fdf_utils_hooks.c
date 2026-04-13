@@ -6,12 +6,11 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 16:04:55 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/01 16:25:32 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:31:33 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_utils.h"
-#include "src/libft/printfft.h"
 #include "src/mlx/mlx.h"
 
 int	key_hook(int keycode, t_vars *mlx)

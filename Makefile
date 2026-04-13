@@ -66,7 +66,7 @@ fclean: clean
 	@printf "${RED}Deleting archives and binaries\n${NEUTRAL}"
 
 clean:
-	@rm -f $(OBJS) test.o
+	@rm -f $(OBJS)
 	@echo "${RED}Deleting object files\n${NEUTRAL}"
 
 .PHONY: all fclean clean re debug test

@@ -6,12 +6,11 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:30:05 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/07 22:55:32 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:30:59 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_utils.h"
-#include "src/libft/libft.h"
 #include <math.h>
 
 t_bbi	fdf_iso_bb(const t_fdf *fdf, const t_vec2i *iso_coord)

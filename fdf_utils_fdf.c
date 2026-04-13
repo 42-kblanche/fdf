@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:43:43 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/07 21:26:40 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:44:15 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ t_vec2i	*fdf_iso_coord(const t_fdf *fdf)
 	t_vec3i	tmp_3d_point;
 
 	iso_coords = ft_calloc(fdf->height * fdf->width, sizeof(t_vec2i));
+	if (!iso_coords)
+		return (NULL);
 	i = 0;
 	while (i < fdf->width)
 	{
@@ -62,13 +64,16 @@ t_vec2i	*fdf_iso_coord(const t_fdf *fdf)
 	return (iso_coords);
 }
 
-void	fdf_draw(t_data *img, const t_fdf *fdf, t_color c)
+int	fdf_draw(t_data *img, const t_fdf *fdf, t_color c)
 {
 	t_vec2i	*iso_coord;
 
 	iso_coord = fdf_iso_coord(fdf);
+	if (!iso_coord)
+		return (ERROR_MALLOC_ISO_COORDS);
 	fdf_iso_scale(fdf, &iso_coord);
 	fdf_iso_translate(fdf, &iso_coord);
 	fdf_iso_draw(img, fdf, c, iso_coord);
 	free(iso_coord);
+	return (0);
 }

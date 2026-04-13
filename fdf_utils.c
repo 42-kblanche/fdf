@@ -6,12 +6,34 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 09:12:43 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/07 21:26:00 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:39:34 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_utils.h"
 #include "src/libft/printfft.h"
+#include "src/libft/libft.h"
+#include <stdlib.h>
+
+size_t	fdf_count_valid_cells(const char *line)
+{
+	size_t	i;
+	size_t	ret;
+	char	**cells;
+
+	i = 0;
+	ret = 0;
+	cells = ft_split(line, ' ');
+	while (cells[i])
+	{
+		if (*(cells[i]))
+			++ret;
+		free(cells[i]);
+		++i;
+	}
+	free(cells);
+	return (ret);
+}
 
 size_t	fdf_pixel_offset(int x, int y, t_data *data)
 {
@@ -51,6 +73,8 @@ void	fdf_err_message(int err_code)
 		ft_errorf("Error: fdf data invalid.\n");
 	if (err_code == ERROR_MALLOC_EXTRACT_CELLS)
 		ft_errorf("Error while creating fdf structure.\n");
+	if (err_code == ERROR_MALLOC_ISO_COORDS)
+		ft_errorf("Error while transforming fdf coordinates.\n");
 }
 
 void	fdf_print_data(const t_fdf *fdf)

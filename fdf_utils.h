@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 21:09:58 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/07 23:14:28 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:38:50 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ enum	e_err_codes
 	ERROR_FILE_EMPTY,
 	ERROR_MALFORMED_FDF,
 	ERROR_MALLOC_EXTRACT_CELLS,
+	ERROR_MALLOC_ISO_COORDS,
 };
 
 typedef struct s_vars
@@ -68,6 +69,7 @@ typedef struct s_fdf
 	size_t	width;
 }				t_fdf;
 
+size_t	fdf_count_valid_cells(const char *line);
 size_t	fdf_pixel_offset(int x, int y, t_data *data);
 int		fdf_pixel_put(t_data *img, int x, int y, t_color color);
 void	fdf_err_message(int err_code);
@@ -87,7 +89,7 @@ t_vec2i	fdf_calc_translate(const t_fdf *fdf, const t_vec2i *iso_coord);
 t_vec3i	fdf_calc_vec3(const t_fdf *fdf, int x, int y);
 int		fdf_calc_z(const t_fdf *fdf, int x, int y);
 void	fdf_print_data(const t_fdf *fdf);
-void	fdf_draw(t_data *img, const t_fdf *fdf, t_color c);
+int		fdf_draw(t_data *img, const t_fdf *fdf, t_color c);
 
 int		key_hook(int keycode, t_vars *mlx);
 int		quit_hook(t_vars *mlx);

@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 17:49:12 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/07 20:03:37 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:43:28 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,13 @@ static void	close_fdf(t_vars *mlx, t_data *img, t_fdf *fdf_data)
 	free(mlx->mlx);
 }
 
-static void	fdf_render(t_vars *mlx, t_data *img, t_fdf *fdf_data)
+static int	fdf_render(t_vars *mlx, t_data *img, t_fdf *fdf_data)
 {
-	fdf_draw(img, fdf_data, HEX_COLOR_RED);
+	int	err_code;
+
+	err_code = fdf_draw(img, fdf_data, HEX_COLOR_RED);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, img->img, 0, 0);
+	return (err_code);
 }
 
 static int	fdf_init(t_vars *mlx, t_data *img)
@@ -68,8 +71,8 @@ int	fdf_exec(t_fdf *fdf_data)
 	if (err_code)
 		return (err_code);
 	bind_hooks(&mlx);
-	fdf_render(&mlx, &img, fdf_data);
+	err_code = fdf_render(&mlx, &img, fdf_data);
 	mlx_loop(mlx.mlx);
 	close_fdf(&mlx, &img, fdf_data);
-	return (0);
+	return (err_code);
 }

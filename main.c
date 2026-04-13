@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:53:15 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/07 19:25:01 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/13 14:52:10 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include <math.h>
 
 static int	fdf_count_lines(char *filename, t_fdf *fdf)
 {
@@ -29,26 +28,6 @@ static int	fdf_count_lines(char *filename, t_fdf *fdf)
 	if (fdf->height == 0)
 		return (ERROR_FILE_EMPTY);
 	return (0);
-}
-
-static size_t	fdf_count_valid_cells(const char *line)
-{
-	size_t	i;
-	size_t	ret;
-	char	**cells;
-
-	i = 0;
-	ret = 0;
-	cells = ft_split(line, ' ');
-	while (cells[i])
-	{
-		if (*(cells[i]))
-			++ret;
-		free(cells[i]);
-		++i;
-	}
-	free(cells);
-	return (ret);
 }
 
 static int	fdf_extract_cells(const char *line, t_fdf *fdf)
@@ -80,20 +59,12 @@ static int	fdf_extract_cells(const char *line, t_fdf *fdf)
 	return (err_code);
 }
 
-static int	fdf_from_file(char *filename, t_fdf *fdf)
+static int	fdf_from_file_loop(int fd, t_fdf *fdf)
 {
 	int		err_code;
-	int		fd;
 	char	*line;
 
-	fdf->width = 0;
-	err_code = fdf_count_lines(filename, fdf);
-	if (err_code)
-		return (err_code);
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (ERROR_READ_FROM_FILE);
-	// FIXME: leak with 42-err.fdf
+	err_code = 0;
 	line = ft_gnl(fd);
 	fdf->width = fdf_count_valid_cells(line);
 	fdf->data = ft_calloc(fdf->width * fdf->height, sizeof(int));
@@ -105,7 +76,27 @@ static int	fdf_from_file(char *filename, t_fdf *fdf)
 		free(line);
 		line = ft_gnl(fd);
 	}
-	free(line);
+	while (line)
+	{
+		free(line);
+		line = ft_gnl(fd);
+	}
+	return (err_code);
+}
+
+static int	fdf_from_file(char *filename, t_fdf *fdf)
+{
+	int		err_code;
+	int		fd;
+
+	fdf->width = 0;
+	err_code = fdf_count_lines(filename, fdf);
+	if (err_code)
+		return (err_code);
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (ERROR_READ_FROM_FILE);
+	err_code = fdf_from_file_loop(fd, fdf);
 	close(fd);
 	return (err_code);
 }
