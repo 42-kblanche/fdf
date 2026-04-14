@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 16:53:15 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/13 14:52:10 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:41:51 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	fdf_count_lines(char *filename, t_fdf *fdf)
 	if (fd < 0)
 		return (ERROR_READ_FROM_FILE);
 	fdf->height = ft_count_lines(fd);
+	close(fd);
 	if (fdf->height == 0)
 		return (ERROR_FILE_EMPTY);
 	return (0);

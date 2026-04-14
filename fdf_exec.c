@@ -6,7 +6,7 @@
 /*   By: kblanche <kblanche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 17:49:12 by kblanche          #+#    #+#             */
-/*   Updated: 2026/04/13 14:43:28 by kblanche         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:41:59 by kblanche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	close_fdf(t_vars *mlx, t_data *img, t_fdf *fdf_data)
 {
 	free(fdf_data->data);
 	fdf_data->data = NULL;
+	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_image(mlx->mlx, img->img);
 	mlx_destroy_display(mlx->mlx);
 	free(mlx->mlx);
